@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.services.BlueprintsServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,32 @@ public class BlueprintAPIController {
             Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>("Error ",HttpStatus.NOT_FOUND);
         }
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<?> newBlueprint(@RequestBody Blueprint name){
+        try {
+            //registrar dato
+            bs.registerBlueprint(name);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception ex) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("Error ",HttpStatus.FORBIDDEN);
+        }
+
+    }
+
+    @PutMapping(value = "/{author}/{bpname}")
+    public ResponseEntity<?> updateBlueprint(@PathVariable String author, @PathVariable String bpname, @RequestBody Blueprint blueprint){
+        try {
+            //registrar dato
+            bs.updateBlueprint(bpname, author, blueprint);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception ex) {            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+
+            return new ResponseEntity<>("Error ",HttpStatus.FORBIDDEN);
+        }
+
     }
 }
 

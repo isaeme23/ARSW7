@@ -74,7 +74,20 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         return blueprintSet;
     }
 
+    @Override
     public HashSet<Blueprint> getBlueprints(){
         return new HashSet<Blueprint>(blueprints.values());
+    }
+
+
+    @Override
+    public Blueprint newBlueprint(String name, String author){
+        return new Blueprint(name, author);
+    }
+
+    @Override
+    public void updateBlueprint(String name, String author, Blueprint blueprint) {
+        Tuple<String, String> key = new Tuple<>(author, name);
+        blueprints.put(key, blueprint);
     }
 }

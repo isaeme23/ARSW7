@@ -74,5 +74,14 @@ public class BlueprintsServices {
         }
 
     }
-    
+
+    public Blueprint newBlueprint(String name, String author) throws BlueprintPersistenceException {
+        Blueprint b = bpp.newBlueprint(name, author);
+        registerBlueprint(b);
+        return b;
+    }
+
+    public void updateBlueprint(String name, String author, Blueprint blueprint){
+        bpp.updateBlueprint(name, author, blueprint);
+    }
 }
