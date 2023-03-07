@@ -15,9 +15,7 @@ import edu.eci.arsw.blueprints.services.BlueprintsServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -34,6 +32,28 @@ public class BlueprintAPIController {
         try {
             //obtener datos que se enviarán a través del API
             return new ResponseEntity<>(bs.getAllBlueprints(), HttpStatus.ACCEPTED);
+        } catch (Exception ex) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("Error ",HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/{author}")
+    public ResponseEntity<?> getBlueprintsByAuthor(@PathVariable String author){
+        try {
+            //obtener datos que se enviarán a través del API
+            return new ResponseEntity<>(bs.getBlueprintsByAuthor(author), HttpStatus.ACCEPTED);
+        } catch (Exception ex) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>("Error ",HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/{author}/{bpname}")
+    public ResponseEntity<?> getBlueprint(@PathVariable String author, @PathVariable String bpname){
+        try {
+            //obtener datos que se enviarán a través del API
+            return new ResponseEntity<>(bs.getBlueprint(author, bpname), HttpStatus.ACCEPTED);
         } catch (Exception ex) {
             Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
             return new ResponseEntity<>("Error ",HttpStatus.NOT_FOUND);

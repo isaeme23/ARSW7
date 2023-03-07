@@ -31,13 +31,13 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         // Plano 1
         // Asociado al mismo autor que el segundo plano
         Point[] pts=new Point[]{new Point(140, 140),new Point(115, 115)};
-        Blueprint bp=new Blueprint("_authorname_", "_bpname_ ",pts);
+        Blueprint bp=new Blueprint("_authorname_", "_bpname_",pts);
         blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
 
         // Plano 2
         // Asociado al mismo autor que el primer plano
         Point[] pts1=new Point[]{new Point(150, 150),new Point(115, 110)};
-        Blueprint bp1=new Blueprint("_authorname_", "_bpnameone_ ",pts1);
+        Blueprint bp1=new Blueprint("_authorname_", "_bpnameone_",pts1);
         blueprints.put(new Tuple<>(bp1.getAuthor(),bp1.getName()), bp1);
 
         // Plano 3
