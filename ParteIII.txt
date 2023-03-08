@@ -1,0 +1,7 @@
+1. Las condiciones de carrera que pueden existir es que se hagan un GET y un POST al mismo tiempo, por lo
+que debemos controlar el acceso y creacion de planos del Hashmap que almacena los datos de los planos.
+
+2. Las regiones criticas serian el acceso y modificacion del arreglo en los metodos de getallbrlueprints y
+update blueprints en el servicio y controlador de la api.
+
+Para arreglar esto, usamos un ConcurrentHashMap en vez de un hashmap en la clase de InMemoryPersistence
