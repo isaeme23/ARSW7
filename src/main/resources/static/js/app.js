@@ -2,6 +2,7 @@ var app = (function(api){
 
     var author;
     var lista;
+    var bpname;
 
     function saveAuthor(){
          $("#name").text(author + "'s Blueprints");
@@ -30,7 +31,7 @@ var app = (function(api){
 
          datanew.map((elementos) => {
              $("#table > tbody:last").append($("<tr><td>" + elementos.name + "</td><td>" + elementos.puntos.toString() +
-                 "</td><td>" + "<button  id=" + elementos.name + " onclick=app.getBlueprintByAuthorAndName(this)>open</button>" + "</td>"));
+                 "</td><td>" + "<button  id=" + elementos.name + " onclick=app.getBlueprintsAuthorAndName('"+ author + "','" +  elementos.name +"')>open</button>" + "</td>"));
          });
          const total = datanew.reduce((suma, {puntos}) => suma + puntos, 0);
 
@@ -38,8 +39,26 @@ var app = (function(api){
         }
     }
 
+    function getBlueprintsAuthorAndName(author, bpname){
+        api.getBlueprintsByNameAndAuthor(author, bpname, canvas);
+    }
+
+    var canvas = function(data){
+        $(document).ready(function() {
+                var c = document.getElementById("myCanvas");
+                var ctx = c.getContext("2d");
+                c.width = c.width;
+                console.log(data);
+                data.points.map((elemento) => {
+                             ctx.lineTo(elemento.x,elemento.y);
+                         });
+                ctx.stroke();
+        });
+    }
+
     return{
         saveAuthor:saveAuthor,
-        getBlueprintsAuthor:getBlueprintsAuthor
+        getBlueprintsAuthor:getBlueprintsAuthor,
+        getBlueprintsAuthorAndName:getBlueprintsAuthorAndName
     }
-})(apimock);
+})(apiclient);

@@ -1,6 +1,6 @@
 //@author hcadavid
 
-apimock=(function(){
+apiclient=(function(){
 
 	var mockdata=[];
 
@@ -15,16 +15,11 @@ apimock=(function(){
 
 	return {
 		getBlueprintsByAuthor:function(authname,callback){
-			callback(
-				mockdata[authname]
-			);
+		    //console.log($.get(`/blueprints/${authname}`).responseTEXT);
+			$.get(`http://localhost:8080/blueprints/${authname}`, function(data) {callback(data)});
 		},
-
 		getBlueprintsByNameAndAuthor:function(authname,bpname,callback){
-
-			callback(
-				mockdata[authname].find(function(e){return e.name===bpname})
-			);
+            $.get(`http://localhost:8080/blueprints/${authname}/${bpname}`, function(data) {callback(data)});
 		}
 	}
 
