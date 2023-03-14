@@ -16,12 +16,22 @@
 <body>
 <h4><b>Blueprints</b></h4>
 <span>Author</span><input id="author">
-<button type="button" onclick="app.saveAuthor()">Get Blueprints</button>
-<table>
-    <th>Name</th>
-    <th>Author</th>
-    <th>Points</th>
+<button type="button" onclick="app.getBlueprintsAuthor()">Get Blueprints</button>
+<table id="table">
+    <h2 id="name"></h2>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Numer Of Points</th>
+            <th>Open</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+
 </table>
+
+<h4 id="points">Total Puntos</h4>
 
 </body>
 </html>
