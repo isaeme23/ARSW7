@@ -13,27 +13,34 @@
     <script src="js/apiclient.js"></script>
     <script src="js/app.js" id="app"></script>
 
+    <link rel="stylesheet" href="style.css">
+
 
 </head>
 <body>
-<h4><b>Blueprints</b></h4>
-<span>Author</span><input id="author">
-<button type="button" onclick="app.getBlueprintsAuthor()">Get Blueprints</button>
-<table id="table">
-    <h2 id="name"></h2>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Numer Of Points</th>
-            <th>Open</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
+<div class="big">
+    <div class="card">
+        <h4 id="blueprints">Blueprints</h4>
+        <span>Author</span><input id="author">
+        <button type="button" onclick="app.getBlueprintsAuthor()">Get Blueprints</button>
 
-</table>
+        <table id="table">
+            <h2 id="name"></h2>
+            <thead>
+            <tr>
+                <th id="header1">Name</th>
+                <th id="header2">Numer Of Points</th>
+                <th id="header3">Open</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
 
-<h4 id="points">Total Puntos</h4>
-<canvas id="myCanvas" width="500" height="500"></canvas>
+        </table>
+
+        <h4 id="points">Total Puntos</h4>
+        <canvas id="myCanvas" width="500" height="500"></canvas>
+    </div>
+</div>
 </body>
 </html>
