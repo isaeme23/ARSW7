@@ -33,10 +33,14 @@ var app = (function(api){
              $("#table > tbody:last").append($("<tr><td>" + elementos.name + "</td><td>" + elementos.puntos.toString() +
                  "</td><td>" + "<button  id=" + elementos.name + " onclick=app.getBlueprintsAuthorAndName('"+ author + "','" +  elementos.name +"')>open</button>" + "</td>"));
          });
-         const total = datanew.reduce((suma, {puntos}) => suma + puntos, 0);
-
-         $("#points").text("Total user points: " + total);
+         total(datanew);
         }
+    }
+
+    let total = function(data){
+        let aux = 0;
+        let totalPoints = data.reduce((accumulator, x) => accumulator + x.puntos, aux);
+        $("#points").html(`Total user points: ${totalPoints}`);
     }
 
     function getBlueprintsAuthorAndName(author, bpname){

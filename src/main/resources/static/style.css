@@ -1,7 +1,7 @@
 * {
   background: #f0f0f0;
 }
-#blueprints, #header1, #header2, #header3, #points{
+#blueprints, #header1, #header2, #header3, #points, #name{
     font-family: 'Verdana';
     background-color: transparent;
 }
