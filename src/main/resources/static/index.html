@@ -9,11 +9,12 @@
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet"
           href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+
+    <link rel="stylesheet" href="style.css">
     <script src="js/apimock.js"></script>
     <script src="js/apiclient.js"></script>
     <script src="js/app.js" id="app"></script>
-
-    <link rel="stylesheet" href="style.css">
 
 
 </head>
@@ -39,8 +40,9 @@
         </table>
 
         <h4 id="points">Total Puntos</h4>
-        <canvas id="myCanvas" width="200" height="200"></canvas>
     </div>
 </div>
+<canvas id="myCanvas" width="200" height="200" onclick="app.init()"></canvas>
 </body>
+
 </html>

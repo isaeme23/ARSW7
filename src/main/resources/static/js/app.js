@@ -1,8 +1,11 @@
+$( document ).ready(function() {
 var app = (function(api){
 
     var author;
     var lista;
-    var bpname;
+    var bpnames = "";
+    var canvas1 = document.getElementById("myCanvas"),
+              context = canvas1.getContext("2d");
 
     function saveAuthor(){
          $("#name").text(author + "'s Blueprints");
@@ -44,6 +47,7 @@ var app = (function(api){
     }
 
     function getBlueprintsAuthorAndName(author, bpname){
+        bpnames = bpname;
         api.getBlueprintsByNameAndAuthor(author, bpname, canvas);
     }
 
@@ -57,12 +61,41 @@ var app = (function(api){
                              ctx.lineTo(elemento.x,elemento.y);
                          });
                 ctx.stroke();
+                return data;
         });
     }
+
+    function init(){
+         $(document).ready(function() {
+            console.info('initialized');
+
+                  //if PointerEvent is suppported by the browser:
+                  if(window.PointerEvent) {
+                    canvas1.addEventListener("pointerdown", function(event){
+                      //alert('pointerdown at '+event.pageX+','+event.pageY);
+                      console.log(bpnames);
+                      if(bpnames != ""){
+                        //canvas.points.append(event.pageX, event.pageY);
+                        console.log(canvas.points);
+                      }
+                    });
+                  }
+                  else {
+                    canvas1.addEventListener("mousedown", function(event){
+                        //alert('mousedown at '+event.clientX+','+event.clientY);
+
+                      }
+                    );
+                  }
+            });
+         }
 
     return{
         saveAuthor:saveAuthor,
         getBlueprintsAuthor:getBlueprintsAuthor,
-        getBlueprintsAuthorAndName:getBlueprintsAuthorAndName
-    }
+        getBlueprintsAuthorAndName:getBlueprintsAuthorAndName,
+        init:init
+    };
 })(apiclient);
+
+});
