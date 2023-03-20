@@ -12,9 +12,6 @@
 
 
     <link rel="stylesheet" href="style.css">
-    <script src="js/apimock.js"></script>
-    <script src="js/apiclient.js"></script>
-    <script src="js/app.js" id="app"></script>
 
 
 </head>
@@ -24,6 +21,8 @@
         <h4 id="blueprints">Blueprints</h4>
         <span>Author</span><input id="author">
         <button type="button" onclick="app.getBlueprintsAuthor()">Get Blueprints</button>
+        <button type="button" onclick="app.createBlueprint()">Create Blueprints</button>
+
 
         <table id="table">
             <h2 id="name"></h2>
@@ -40,9 +39,15 @@
         </table>
 
         <h4 id="points">Total Puntos</h4>
+        <canvas id="myCanvas" width="200" height="200" onclick="app.init()"></canvas>
+        <button type="button" onclick="app.saveUpdate()">Save/Update</button>
+        <button type="button" onclick="app"></button>
     </div>
 </div>
-<canvas id="myCanvas" width="200" height="200" onclick="app.init()"></canvas>
 </body>
+
+<script src="js/apimock.js"></script>
+<script src="js/apiclient.js"></script>
+<script src="js/app.js" id="app"></script>
 
 </html>

@@ -1,11 +1,12 @@
-$( document ).ready(function() {
+//$( document ).ready(function() {
 var app = (function(api){
 
     var author;
     var lista;
-    var bpnames = "";
-    var canvas1 = document.getElementById("myCanvas"),
-              context = canvas1.getContext("2d");
+    var bpnames = {};
+    var name;
+
+
 
     function saveAuthor(){
          $("#name").text(author + "'s Blueprints");
@@ -18,12 +19,7 @@ var app = (function(api){
 
     var blueprints = function(data){
         $("#table tbody").empty();
-     if (data === undefined) {
-         alert("No existe el autor");
-         $("#name").empty();
-         $("#points").text("Total Points");
-         $("#nameblu").empty();
-     } else {
+
         saveAuthor();
          const datanew = data.map((elemento) => {
              return {
@@ -37,7 +33,6 @@ var app = (function(api){
                  "</td><td>" + "<button  id=" + elementos.name + " onclick=app.getBlueprintsAuthorAndName('"+ author + "','" +  elementos.name +"')>open</button>" + "</td>"));
          });
          total(datanew);
-        }
     }
 
     let total = function(data){
@@ -47,12 +42,12 @@ var app = (function(api){
     }
 
     function getBlueprintsAuthorAndName(author, bpname){
-        bpnames = bpname;
         api.getBlueprintsByNameAndAuthor(author, bpname, canvas);
     }
 
     var canvas = function(data){
         $(document).ready(function() {
+                bpnames = data;
                 var c = document.getElementById("myCanvas");
                 var ctx = c.getContext("2d");
                 c.width = c.width;
@@ -65,28 +60,75 @@ var app = (function(api){
         });
     }
 
+    var drawpoint = function(event){
+        //$(document).ready(() => {
+        var canvas = $("myCanvas");
+        context = canvas.getContext("2d");
+        var offset = _getOffset(canvas);
+        bpnames.points.push({x: event.pageX - offset.left,y: event.pageY - offset.top});
+        readyblueprint(bpnames);
+        //});
+    }
+
+    let readyblueprint = (data) =>{
+                        canvas(data);
+                        bpnames = data;}
+
+    let _getOffset = function (obj) {
+            var offsetLeft = 0;
+            var offsetTop = 0;
+            do {
+              if (!isNaN(obj.offsetLeft)) {
+                  offsetLeft += obj.offsetLeft;
+              }
+              if (!isNaN(obj.offsetTop)) {
+                  offsetTop += obj.offsetTop;
+              }
+            } while(obj = obj.offsetParent );
+            return {left: offsetLeft, top: offsetTop};
+        }
+
+    function saveUpdate(){
+        api.putUpdateBluePrint(bpnames);
+        getBlueprintsAuthor();
+    }
+
+    function createBlueprint(){
+        clearCanva();
+        var name = prompt("Ingrese el Nuevo nombre del plano");
+        console.log(name);
+
+
+    }
+
+    function clearCanva(){
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        canvas.width = canvas.width;
+    }
+
+
     function init(){
          $(document).ready(function() {
             console.info('initialized');
-
-                  //if PointerEvent is suppported by the browser:
-                  if(window.PointerEvent) {
-                    canvas1.addEventListener("pointerdown", function(event){
-                      //alert('pointerdown at '+event.pageX+','+event.pageY);
-                      console.log(bpnames);
-                      if(bpnames != ""){
-                        //canvas.points.append(event.pageX, event.pageY);
-                        console.log(canvas.points);
-                      }
-                    });
-                  }
-                  else {
-                    canvas1.addEventListener("mousedown", function(event){
-                        //alert('mousedown at '+event.clientX+','+event.clientY);
-
-                      }
-                    );
-                  }
+            var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext("2d");
+              if(window.PointerEvent) {
+                canvas.addEventListener("pointerdown", function(event){
+                  var offset = _getOffset(canvas);
+                  bpnames.points.push({x: event.pageX - offset.left,y: event.pageY - offset.top});
+                  readyblueprint(bpnames);
+                }
+                );
+              }
+              else {
+                canvas.addEventListener("mousedown", function(event){
+                  var offset = _getOffset(canvas);
+                  bpnames.points.push({x: event.pageX - offset.left,y: event.pageY - offset.top});
+                  readyblueprint(bpnames);
+                }
+                );
+              }
             });
          }
 
@@ -94,8 +136,11 @@ var app = (function(api){
         saveAuthor:saveAuthor,
         getBlueprintsAuthor:getBlueprintsAuthor,
         getBlueprintsAuthorAndName:getBlueprintsAuthorAndName,
-        init:init
+        init:init,
+        saveUpdate:saveUpdate,
+        clearCanva:clearCanva,
+        createBlueprint:createBlueprint
     };
 })(apiclient);
 
-});
+//});
