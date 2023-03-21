@@ -19,6 +19,13 @@ apiclient=(function(){
                data: JSON.stringify(blueprint),
                contentType: "application/json"
            });
+		},
+		deleteBlueprint:function(authname, bpname){
+		    return $.ajax({
+               url: `http://localhost:8080/blueprints/${author}/${bpname}`,
+               type: 'DELETE',
+               contentType: "application/json"
+           });
 		}
 	}
 

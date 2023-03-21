@@ -10,10 +10,8 @@ import edu.eci.arsw.blueprints.model.Point;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
-import org.hibernate.validator.internal.util.ConcurrentReferenceHashMap;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -91,5 +89,11 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
     public void updateBlueprint(String name, String author, Blueprint blueprint) {
         Tuple<String, String> key = new Tuple<>(author, name);
         blueprints.put(key, blueprint);
+    }
+
+    @Override
+    public void deleteBlueprint(String name, String author){
+        Tuple<String, String> key = new Tuple<>(author, name);
+        blueprints.remove(key);
     }
 }

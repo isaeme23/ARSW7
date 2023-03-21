@@ -84,4 +84,8 @@ public class BlueprintsServices {
     public void updateBlueprint(String name, String author, Blueprint blueprint){
         bpp.updateBlueprint(name, author, blueprint);
     }
+
+    public void deleteBlueprint(String name, String author){
+        bpp.deleteBlueprint(name, author);
+    }
 }

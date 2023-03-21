@@ -96,15 +96,25 @@ var app = (function(api){
     function createBlueprint(){
         clearCanva();
         var name = prompt("Ingrese el Nuevo nombre del plano");
-        console.log(name);
-
-
+        bpnames = {
+            author: author,
+            name: name,
+            points: []
+        };
+        console.log(bpnames);
     }
 
     function clearCanva(){
         var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
         canvas.width = canvas.width;
+    }
+
+    function deleteBlueprint(){
+        api.deleteBlueprint(author, bpnames.name);
+        clearCanva();
+        bpnames = {};
+        getBlueprintsAuthor();
     }
 
 
@@ -116,8 +126,8 @@ var app = (function(api){
               if(window.PointerEvent) {
                 canvas.addEventListener("pointerdown", function(event){
                   var offset = _getOffset(canvas);
-                  bpnames.points.push({x: event.pageX - offset.left,y: event.pageY - offset.top});
-                  readyblueprint(bpnames);
+                      bpnames.points.push({x: event.pageX - offset.left,y: event.pageY - offset.top});
+                      readyblueprint(bpnames);
                 }
                 );
               }
@@ -139,7 +149,8 @@ var app = (function(api){
         init:init,
         saveUpdate:saveUpdate,
         clearCanva:clearCanva,
-        createBlueprint:createBlueprint
+        createBlueprint:createBlueprint,
+        deleteBlueprint:deleteBlueprint
     };
 })(apiclient);
 

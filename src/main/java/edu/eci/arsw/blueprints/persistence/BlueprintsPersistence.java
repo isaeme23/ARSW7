@@ -40,4 +40,6 @@ public interface BlueprintsPersistence {
     Blueprint newBlueprint(String name, String author);
 
     public void updateBlueprint(String name, String author, Blueprint blueprint);
+
+    public void deleteBlueprint(String name, String author);
 }

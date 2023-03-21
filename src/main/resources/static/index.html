@@ -7,6 +7,7 @@
 
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet"
           href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
 
@@ -41,13 +42,11 @@
         <h4 id="points">Total Puntos</h4>
         <canvas id="myCanvas" width="200" height="200" onclick="app.init()"></canvas>
         <button type="button" onclick="app.saveUpdate()">Save/Update</button>
-        <button type="button" onclick="app"></button>
+        <button type="button" onclick="app.deleteBlueprint()">Delete</button>
     </div>
 </div>
 </body>
-
 <script src="js/apimock.js"></script>
 <script src="js/apiclient.js"></script>
 <script src="js/app.js" id="app"></script>
-
 </html>
