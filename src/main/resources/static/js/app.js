@@ -51,7 +51,6 @@ var app = (function(api){
                 var c = document.getElementById("myCanvas");
                 var ctx = c.getContext("2d");
                 c.width = c.width;
-                console.log(data);
                 data.points.map((elemento) => {
                              ctx.lineTo(elemento.x,elemento.y);
                          });
@@ -60,15 +59,6 @@ var app = (function(api){
         });
     }
 
-    var drawpoint = function(event){
-        //$(document).ready(() => {
-        var canvas = $("myCanvas");
-        context = canvas.getContext("2d");
-        var offset = _getOffset(canvas);
-        bpnames.points.push({x: event.pageX - offset.left,y: event.pageY - offset.top});
-        readyblueprint(bpnames);
-        //});
-    }
 
     let readyblueprint = (data) =>{
                         canvas(data);
@@ -103,7 +93,6 @@ var app = (function(api){
             points: []
         };
         getBlueprintsAuthor();
-        console.log(bpnames);
     }
 
     function clearCanva(){
@@ -120,15 +109,11 @@ var app = (function(api){
         getBlueprintsAuthor();
     }
 
-    //let deleteBlueprints = function() {
-        //api.deleteBlueprint(bpnames.author, bpnames.name);
-        //getBlueprintsAuthor();
-    //}
+
 
 
     function init(){
          $(document).ready(function() {
-            console.info('initialized');
             var canvas = document.getElementById("myCanvas");
             var ctx = canvas.getContext("2d");
               if(window.PointerEvent) {
