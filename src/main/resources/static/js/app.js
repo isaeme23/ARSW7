@@ -91,6 +91,7 @@ var app = (function(api){
     function saveUpdate(){
         api.putUpdateBluePrint(bpnames);
         getBlueprintsAuthor();
+        getBlueprintsAuthor();
     }
 
     function createBlueprint(){
@@ -101,6 +102,7 @@ var app = (function(api){
             name: name,
             points: []
         };
+        getBlueprintsAuthor();
         console.log(bpnames);
     }
 
@@ -111,11 +113,17 @@ var app = (function(api){
     }
 
     function deleteBlueprint(){
-        api.deleteBlueprint(author, bpnames.name);
+        getBlueprintsAuthor();
+        api.deleteBlueprint(bpnames);
         clearCanva();
         bpnames = {};
         getBlueprintsAuthor();
     }
+
+    //let deleteBlueprints = function() {
+        //api.deleteBlueprint(bpnames.author, bpnames.name);
+        //getBlueprintsAuthor();
+    //}
 
 
     function init(){

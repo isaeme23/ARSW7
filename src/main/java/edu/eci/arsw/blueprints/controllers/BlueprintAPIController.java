@@ -86,10 +86,10 @@ public class BlueprintAPIController {
         }
 
     }
-    @DeleteMapping(value = "{author}/{bpname}")
-    public ResponseEntity<?> deleteBlueprint(@PathVariable String author,@PathVariable String bpName) {
+    @DeleteMapping(value = "/{author}/{bpname}")
+    public ResponseEntity<?> deleteBlueprint(@PathVariable String author,@PathVariable String bpname) {
         try {
-            bs.deleteBlueprint(author, bpName);
+            bs.deleteBlueprint(bpname, author);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (Exception ex) {
             Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
